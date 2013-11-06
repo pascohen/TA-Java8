@@ -63,10 +63,10 @@
       <section>
         <h1>Disclaimer</h1>
         <hr />
-        <br /> Amadeus accepts no liability for the content of this
+        <br />Amadeus accepts no liability for the content of this
         presentation, or for the consequences of any actions taken on the
         basis of the information provided. Any views or opinions presented
-        in this presentation are solely those of the author and do not
+        in this presentation are solely those of the authors and do not
         represent those of the company.
 
       </section>
@@ -228,44 +228,174 @@ long bytes = 0b11010010_01101001_10010100_10010010;</code></pre>
     </section>
     <section>
         <section><h3>Java8 Incoming features</h3></section>
-<section><h3>Functional Interfaces</h3><hr/>
-Interface with a single abstract method
-Optional @FunctionalInterface annotation
+        <section><h3>Functional Interfaces</h3><hr/>
+           <ul>
+              <div class="fragment" data-fragment-index="1">       
+                 <li>Interface with a single abstract method</li>
+              </div>
+              <div class="fragment" data-fragment-index="2">       
+                 <li>Optional <code>@FunctionalInterface</code> annotation</li>
+              </div>
+             <div class="fragment" data-fragment-index="3">       
+                <li>Key feature to introduce lambdas</li>
+             </div>
+          </ul>
+          <div class="fragment" data-fragment-index="4">   
+             <br/><pre><code class="language-java">@FunctionalInterface
+public interface SimpleFunctionalInterface {
+  void doSomething();
+}</code></pre>
+          </div>
+        </section>
+        <section><h3>Lambdas</h3><hr/>
+           <div id="lambdaContent">
+              <ul>
+              <div class="fragment" data-fragment-index="1">       
+                 <li>Replace advantageously anonymous functions
+                    <ul><li>Less boilerplate code</li></ul>
+              </li>
+              </div>
+              <div class="fragment" data-fragment-index="2">       
+                 <li>Syntax like <code>( element -&gt; //code ) </code>
+                 <ul><li>Compiler will infer types</li></ul>
+                 </li>
+              </div>
+             <div class="fragment" data-fragment-index="3">       
+                <li>Many reference implementations in <code>java.util.function</code> package</li>
+        </div>
+        <div class="fragment" data-fragment-index="4">       
+                <li>Methods can be referenced into lambdas thanks to the <code>::</code> operator (any C++ reminiscence ?)</li>
+             </div>
+     </ul>
+     </div>
+     <div id="lambda1" class="fragment" data-fragment-index="5">   
+     Before:
+     <pre><code style="line-height: 1em" class="language-java">class Content {
+  public String title;
+  //...
+}
 
-</section>
-<section><h3>Lambdas</h3><hr/>
-replace advantageously anonymous function
-p -&lt; pp
-java.util.function
-Reference to method with ::
-</section>
-<section><h3>Streams</h3><hr/>
-Application of lambdas
-Stream can be seen as an Iterator
-pass a computation to get the next element
-Can have infinite stream ex nextInt
-Can be parallelized
-enrich Collections
+interface ContentPresenter {
+  String getPresentation(Content c);
+}
+
+class ContentProcessor {
+  public String process(Content c) {
+    ContentPresenter myPresenter = new ContentPresenter() {
+      public String getPresentation(Content content) {
+        return "&lt;&lt;"+content.content+"&gt;&gt;"
+       }
+    }
+    myPresenter.getPresentation(c)
+  }
+}</code></pre>
+          </div>
+          <div id="lambda2" class="fragment" data-fragment-index="6">   
+          After:
+<pre><code style="line-height: 1em" class="language-java">class Content {
+  public String title;
+  //...
+}
+
+interface ContentPresenter {
+ String getPresentation(Content c);
+}
+
+class ContentProcessor {
+  public String process(Content c) {
+    ContentPresenter myPresenter = content -&gt; "&lt;&lt;"+content.title+"&gt;&gt;"
+    myPresenter.getPresentation(c)
+  }
+}</code></pre>
+          </div>
 </section>
 <section><h3>Defender methods</h3><hr/>
-default behavior in interfaces</section>
-        <section><h3>Accumulators</h3><hr/></section>
-<section><h3>Java time</h3><hr/>
-JSR 310: Date and Time API
-Fluent
-Immutable
-Extensible
+   <ul>
+          <div class="fragment" data-fragment-index="1">       
+                 <li>Add default behavior to interface methods</li>
+              </div>
+              <div class="fragment" data-fragment-index="2">       
+                 <li>Offers extensibility without breaking implementors backward compatibility</li>
+              </div>
+              <div class="fragment" data-fragment-index="3">       
+                 <li>Compatible with functional interfaces</li>
+              </div>
+          <div class="fragment" data-fragment-index="4">   
+             <br/><pre><code class="language-java">public interface MyServiceInterface {
+   void oldMethod();
 
-java.time, and four subpackages
+   default void aNewMethod() {
+      //Some code
+      // Default behavior can be overridden
+   }
+}</code></pre>
+          </div>
+   </section>
 
-SystemTime, duration and HumanTime
-TimeZone
-Parsing anmd formatting
-</section>
-<section><h3>Nashorn</h3><hr/>
-Replace Rhino
-More efficient
-</section>   
+        <section><h3>Streams</h3><hr/>
+           <ul>
+              <div class="fragment" data-fragment-index="1">       
+                 <li>Direct application of Functional features</li>
+                 <li>Enrich Collections</li>
+              </div>
+              <div class="fragment" data-fragment-index="2">       
+                 <br/>
+                 <li>Behaves like an iterator (only read forward)</li>
+              </div>
+              <div class="fragment" data-fragment-index="3">                        
+                 <li>Lazy fetching
+                    <div class="fragment" data-fragment-index="4">                        
+                       <ul><li> =&gt; Can have infinite streams - ex: next integer generator</li></ul>
+                    </div>
+                 </li>
+             </div>
+             <div class="fragment" data-fragment-index="5">       
+                <li>Designed to support pipelining
+                  <div class="fragment" data-fragment-index="6">                        
+                     <ul><li>Typically map/reduce chain</li></ul>
+                  </div>
+                </li>
+             </div>
+             <div class="fragment" data-fragment-index="7">       
+                <li>Designed to be parallelization capable</li>
+             </div>
+          </ul>
+        </section>
+        <!--section><h3>Accumulators</h3><hr/></section-->
+        <section><h3>Java time</h3>
+           <h5>Implementation of the JSR 310: Date and Time API</h5>
+           <hr/>
+           <ul>
+              <div class="fragment" data-fragment-index="1">       
+                 <li>Fluent</li>
+                 <li>Immutable</li>
+                 <li>Extensible</li>
+              </div>
+              <div class="fragment" data-fragment-index="2">       
+                 <br/>
+                 <li>java.time package, and four subpackages</li>
+             </div>
+             <div class="fragment" data-fragment-index="3">       
+                 <br/>
+                 <li>SystemTime, HumanTime and Duration</li>
+                 <li>TimeZones</li>
+             </div>
+             <div class="fragment" data-fragment-index="4">       
+                <br/>
+                <li>Parsing and Formatting</li>
+             </div>
+          </ul>
+       </section>
+       <section><h3>Nashorn</h3><hr/>
+          <ul>
+             <div class="fragment" data-fragment-index="1">       
+                <li>Replace Rhino</li>
+             </div>
+             <div class="fragment" data-fragment-index="2">       
+                <li>More efficient implementation</li>
+             </div>
+          </ul>
+       </section>   
     </section>
     <section>
         <h3>Live Coding session</h3>
@@ -369,15 +499,23 @@ More efficient
     Reveal.addEventListener( 'fragmentshown', function( event ) {
        if (event.fragment.id == "mcatch1") {
           event.fragment.style.display="none";
-       }
-          console.log(event.fragment); // event.fragment = the fragment DOM element       
-       } );
+       } else if (event.fragment.id == "lambda1") {
+             document.getElementById("lambdaContent").style.display="none";
+       } else if (event.fragment.id == "lambda2") {
+            document.getElementById("lambda1").style.display="none";
+        }
+        console.log("Show "+event.fragment.id); // event.fragment = the fragment DOM element       
+    } );
        
        Reveal.addEventListener( 'fragmenthidden', function( event ) {
        if (event.fragment.id == "mcatch1") {
           event.fragment.style.display="inline";
-       }
-          console.log(event.fragment); // event.fragment = the fragment DOM element       
+	  } else if (event.fragment.id == "lambda1") {
+	         document.getElementById("lambdaContent").style.display="inline";
+		 } else if (event.fragment.id == "lambda2") {
+		        document.getElementById("lambda1").style.display="inline";
+          }
+          console.log("Hide "+event.fragment.id); // event.fragment = the fragment DOM element       
     } );
   </script>
 
