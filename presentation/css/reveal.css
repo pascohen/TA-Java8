@@ -351,10 +351,10 @@ body {
 	vertical-align: top;
 }
 
-.reveal small * {
-	vertical-align: top;
+.reveal small img {
+	vertical-align: middle;
+	margin: 0;
 }
-
 .reveal .stretch {
 	max-width: none;
 	max-height: none;
@@ -1649,4 +1649,16 @@ body {
 div.custom {
   	text-align: left;
 	font-size: 70%;
+}
+
+a[href^="http://www.vim.org"]:before {
+  content: "";
+  display: inline-block;
+  width: 0.8em;
+  height: 0.8em;
+  margin: 0 5px;
+  position: relative;
+  top: 2px;
+  background-image: url(../vim.jpg);
+  background-size: contain;
 }
