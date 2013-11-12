@@ -163,9 +163,9 @@ switch (sport) {
         <section>
           <h3>Automatic resource management</h3>
           <hr />
-     <div style="font-size: 70%" class="custom fragment" data-fragment-index="1">
-          <div>In Pre Java 7 code:</div>
-     <pre><code class="language-java" style="line-height: 1.2em" >static String readFirstLineFromFileWithFinallyBlock(String path) 
+     <div class="fragment" data-fragment-index="1">
+          <div class="custom">In Pre Java 7 code:</div>
+     <pre><code class="language-java">static String readFirstLineFromFileWithFinallyBlock(String path) 
                                                    throws IOException {
     BufferedReader br = new BufferedReader(new FileReader(path));
     try {
@@ -175,10 +175,14 @@ switch (sport) {
     }
 }</code></pre>
      </div>
-     <div style="font-size: 70%" class="custom fragment" data-fragment-index="2">And suffers from limitations</div>
-     <div style="font-size: 70%" class="custom fragment" data-fragment-index="3">
-     <div>In Java 7 code:</div>
-     <pre><code class="language-java" style="line-height: 1.2em">static String readFirstLineFromFile(String path) 
+     <div class="custom fragment" data-fragment-index="2">And suffers from limitations</div>
+	     </section>
+	     <section>
+          <h3>Automatic resource management</h3>
+	  <hr />
+       <div class="fragment" data-fragment-index="1">
+          <div class="custom" >In Java 7 code:</div>
+     <pre><code style="fomt-size: 120%" class="language-java">static String readFirstLineFromFile(String path) 
                                                    throws IOException {
     try (BufferedReader br =
                    new BufferedReader(new FileReader(path))) {
@@ -187,7 +191,7 @@ switch (sport) {
 }
 </code></pre>
      </div>
-     <div style="font-size: 70%" class="custom fragment" data-fragment-index="4">Require to implement Closeable or AutoCloseable interfaces</div>
+     <div class="custom fragment" data-fragment-index="2">Require to implement Closeable or AutoCloseable interfaces</div>
      </section>
      <section>
         <h3>InvokeDynamic</h3>
@@ -210,12 +214,12 @@ switch (sport) {
         <ul>
            <div class="fragment" data-fragment-index="1">
               <li>Numeric literals with underscores</li>
-              <pre><code style="font-size: 90%" class="language-java">long creditCardNumber = 1234_5678_9012_3456L; //Hmmm ...
+              <pre><code class="language-java">long creditCard = 1234_5678_9012_3456L;
 float pi = 3.14_15F;
 long hexBytes = 0xFF_EC_DE_5E;
 long hexWords = 0xCAFE_BABE;
 byte nybbles = 0b0010_0101;
-long bytes = 0b11010010_01101001_10010100_10010010;</code></pre>
+long b = 0b11010010_01101001_10010100_10010010;</code></pre>
           </div>
           <div class="fragment" data-fragment-index="2">       
              <li>File change notification</li>
@@ -270,43 +274,16 @@ public interface SimpleFunctionalInterface {
      </div>
      <div id="lambda1" class="fragment" data-fragment-index="5">   
      Before:
-     <pre><code style="line-height: 1em" class="language-java">class Content {
-  public String title;
-  //...
-}
-
-interface ContentPresenter {
-  String getPresentation(Content c);
-}
-
-class ContentProcessor {
-  public String process(Content c) {
-    ContentPresenter myPresenter = new ContentPresenter() {
-      public String getPresentation(Content content) {
-        return "&lt;&lt;"+content.content+"&gt;&gt;"
-       }
-    }
-    myPresenter.getPresentation(c)
+     <pre><code class="language-java">button.addActionListener(new ActionListener() { 
+  public void actionPerformed(ActionEvent e) { 
+    doSomething(e);
   }
-}</code></pre>
+});</code></pre>
           </div>
           <div id="lambda2" class="fragment" data-fragment-index="6">   
           After:
-<pre><code style="line-height: 1em" class="language-java">class Content {
-  public String title;
-  //...
-}
-
-interface ContentPresenter {
- String getPresentation(Content c);
-}
-
-class ContentProcessor {
-  public String process(Content c) {
-    ContentPresenter myPresenter = content -&gt; "&lt;&lt;"+content.title+"&gt;&gt;"
-    myPresenter.getPresentation(c)
-  }
-}</code></pre>
+<pre><code class="language-java">ActionListener l = e -&gt; doSomething(e);
+</code></pre>
           </div>
 </section>
 <section><h3>Defender methods</h3><hr/>
@@ -406,10 +383,13 @@ class ContentProcessor {
        <hr />
        <ul>
           <div class="fragment" data-fragment-index="1">
-             <li>Java8 is only in early adoption</li>
-          </div>
-          <div class="fragment" data-fragment-index="2">
-             <li>Future roadmap is still blurry</li>
+             <li>Java8 is not yet officially released:
+	     <div class="fragment" data-fragment-index="2">
+                <ul><li>Still in early adoption only</li>
+                    <li>Future roadmap (Java 9,10,...) is still blurry</li>
+                </ul>
+             </div>
+            </li>
           </div>
           <div class="fragment" data-fragment-index="3">
              <br/>
