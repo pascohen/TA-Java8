@@ -100,10 +100,10 @@
           <h3>Diamond operator</h3>
      <hr />
      <div class="custom">In Pre Java 7 code:</div>
-      <pre><code class="language-java">List&lt;Integer&gt; l = new ArrayList&lt;Integer&gt;();</code></pre>
+      <pre><code class="language-java">Map&lt;Entry&lt;Double, String&gt;, List&lt;String&gt;&gt; map = new HashMap&lt;Entry&lt;Double, ...&gt;&gt;&gt;();</code></pre>
           <br/>
      <div class="custom">In Java 7 code:</div>
-     <pre><code class="language-java">List&lt;Integer&gt; l = new ArrayList&lt;&gt;();</code></pre>
+     <pre><code class="language-java">Map&lt;Entry&lt;Double, String&gt;, List&lt;String&gt;&gt; map = new HashMap&lt;&gt;()</code></pre>
         </section>
         <section>
           <h3>Strings in switch statement</h3>
@@ -137,9 +137,9 @@ switch (sport) {
      <div class="custom">In Pre Java 7 code:</div>
           <pre><code class="language-java">try {
    // Some code
-} catch (IOException ioEx) {
+} catch (IllegalAccessException ex) {
    // Some exception handling
-} catch (FileNotFoundException fnfEx) {
+} catch (InvocationTargetException ex) {
    // Some other handling
 }</code></pre> 
      </div>
@@ -155,8 +155,9 @@ switch (sport) {
          <div class="custom">In Java 7 code:</div>
          <pre><code class="language-java">try {
    // Some code
-} catch (IOException | FileNotFoundException fnfEx) {
+} catch (IllegalAccessException | InvocationTargetException ex) {
   // Handle Exceptions
+  // ex type is ReflectiveOperationException 
 }</code></pre>
     </div>
         </section>
@@ -165,31 +166,34 @@ switch (sport) {
           <hr />
      <div class="fragment" data-fragment-index="1">
           <div class="custom">In Pre Java 7 code:</div>
-     <pre><code class="language-java">static String readFirstLineFromFileWithFinallyBlock(String path) 
-                                                   throws IOException {
-    BufferedReader br = new BufferedReader(new FileReader(path));
+     <pre><code class="language-java">BufferedReader br = null;
+try {
+  br = new BufferedReader(new FileReader(path));
+  return br.readLine();
+} catch (IOException e) {
+  // handle exception
+} finally {
+  if (br != null) {
     try {
-        return br.readLine();
-    } finally {
-        if (br != null) br.close();
+      br.close();
+    } catch (IOException e) {
+     // ignore
     }
+  }
 }</code></pre>
      </div>
-     <div class="custom fragment" data-fragment-index="2">And suffers from limitations</div>
+     <div class="custom fragment" data-fragment-index="2">Ugly boilerplate code</div>
 	     </section>
 	     <section>
           <h3>Automatic resource management</h3>
 	  <hr />
        <div class="fragment" data-fragment-index="1">
           <div class="custom" >In Java 7 code:</div>
-     <pre><code style="fomt-size: 120%" class="language-java">static String readFirstLineFromFile(String path) 
-                                                   throws IOException {
-    try (BufferedReader br =
-                   new BufferedReader(new FileReader(path))) {
-        return br.readLine();
-    }
-}
-</code></pre>
+     <pre><code style="fomt-size: 120%" class="language-java">try (BufferedReader br = new BufferedReader(new FileReader(path))) {
+  return br.readLine();
+} catch (IOException e) {
+  // handle exception
+}</code></pre>
      </div>
      <div class="custom fragment" data-fragment-index="2">Require to implement Closeable or AutoCloseable interfaces</div>
      </section>
@@ -205,6 +209,10 @@ switch (sport) {
            <div class="fragment" data-fragment-index="2">
              <br/>
              <li>Ok ... there are few chances that you need to use it by yourself</li>
+           </div>
+           <div class="fragment" data-fragment-index="3">
+             <br/>
+             <li>Java 8 Lambda is based on InvokeDynamic instruction</li>
            </div>
         </ul>
      </section>
@@ -225,7 +233,7 @@ long b = 0b11010010_01101001_10010100_10010010;</code></pre>
              <li>File change notification</li>
           </div>
           <div class="fragment" data-fragment-index="3">
-             <li>Fork/Join</li>
+             <li>Fork/Join (heavily used in Java 8)</li>
           </div>
        </ul>
     </section>
@@ -246,8 +254,8 @@ long b = 0b11010010_01101001_10010100_10010010;</code></pre>
           </ul>
           <div class="fragment" data-fragment-index="4">   
              <br/><pre><code class="language-java">@FunctionalInterface
-public interface SimpleFunctionalInterface {
-  void doSomething();
+public interface Consumer&lt;T&gt; {
+  void accept(T t);
 }</code></pre>
           </div>
         </section>
@@ -275,14 +283,23 @@ public interface SimpleFunctionalInterface {
      <div id="lambda1" class="fragment" data-fragment-index="5">   
      Before:
      <pre><code class="language-java">button.addActionListener(new ActionListener() { 
-  public void actionPerformed(ActionEvent e) { 
+  public void actionPerformed(ActionEvent e) {
     doSomething(e);
   }
-});</code></pre>
+});
+
+Thread t = new Thread() {
+  public void run() {
+    doSomething();
+  }
+};
+</code></pre>
           </div>
           <div id="lambda2" class="fragment" data-fragment-index="6">   
           After:
-<pre><code class="language-java">ActionListener l = e -&gt; doSomething(e);
+<pre><code class="language-java">button.addActionListener(e -> doSomething(e));
+
+Thread t = new Thread(() -> doSomething());
 </code></pre>
           </div>
 </section>
@@ -298,13 +315,15 @@ public interface SimpleFunctionalInterface {
                  <li>Compatible with functional interfaces</li>
               </div>
           <div class="fragment" data-fragment-index="4">   
-             <br/><pre><code class="language-java">public interface MyServiceInterface {
-   void oldMethod();
-
-   default void aNewMethod() {
-      //Some code
-      // Default behavior can be overridden
-   }
+             <br/><pre><code class="language-java">public interface Collection&lt;E&gt; extends Iterable&lt;E&gt; {
+  int size();
+  boolean isEmpty();
+  
+  // ...
+  
+  default Stream<E> stream() {
+    return StreamSupport.stream(spliterator(), false);
+  }
 }</code></pre>
           </div>
    </section>
@@ -385,7 +404,9 @@ public interface SimpleFunctionalInterface {
           <div class="fragment" data-fragment-index="1">
              <li>Java8 is not yet officially released:
 	     <div class="fragment" data-fragment-index="2">
-                <ul><li>Still in early adoption only</li>
+                <ul><li>Scheduled for March 2014</li>
+				    <li>Early adoption JDK used</li>
+				    <li>Still weak support in Eclipse</li>
                     <li>Future roadmap (Java 9,10,...) is still blurry</li>
                 </ul>
              </div>
