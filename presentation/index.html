@@ -282,9 +282,10 @@ public interface Consumer&lt;T&gt; {
      </div>
      <div id="lambda1" class="fragment" data-fragment-index="5">   
      Before:
-     <pre><code class="language-java">button.addActionListener(new ActionListener() { 
+     <pre><code class="language-java">button.addActionListener(new ActionListener() {
   public void actionPerformed(ActionEvent e) {
     doSomething(e);
+    doSomethingElse(e);
   }
 });
 
@@ -297,7 +298,10 @@ Thread t = new Thread() {
           </div>
           <div id="lambda2" class="fragment" data-fragment-index="6">   
           After:
-<pre><code class="language-java">button.addActionListener(e -> doSomething(e));
+<pre><code class="language-java">button.addActionListener(e -&gt; {
+      doSomething(e);
+      doSomethingElse(e);
+});
 
 Thread t = new Thread(() -> doSomething());
 </code></pre>
@@ -392,7 +396,23 @@ Thread t = new Thread(() -> doSomething());
              </div>
           </ul>
        </section>   
-    </section>
+       <section><h3>VM changes</h3><hr/>
+          <ul>
+             <div class="fragment" data-fragment-index="1">       
+                <li>No more PermGen</li>
+             </div>
+             <div class="fragment" data-fragment-index="2">       
+                <li>Class metadata stored in native heap memory</li>
+             </div>
+             <div class="fragment" data-fragment-index="3">       
+                <li>HotSpot and JRockit convergence</li>
+             </div>
+             <div class="fragment" data-fragment-index="4">       
+                <li>For more details, find JEP 122</li>
+             </div>
+          </ul>
+       </section>   
+   </section>
     <section>
         <h3>Live Coding session</h3>
         With NetBeans
