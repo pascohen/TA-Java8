@@ -15,7 +15,7 @@ public class StreamsProcessAge {
        int totalAge = 0;
        int count = 0;
        for (Person p : people) {
-           if (p.getAge() > 18) {
+           if (p.getAge() >= 18) {
                count++;
                totalAdultAge += p.getAge();
            }
@@ -23,7 +23,7 @@ public class StreamsProcessAge {
        }
        
        System.out.println("Avg age (" + people.size() + " people): " + totalAge / people.size());
-       System.out.println("Avg age (" + count + " adults): " + totalAdultAge / count);   
+       System.out.println("Avg age (" + count + " adults): " + totalAdultAge / count);
    } 
 }
 

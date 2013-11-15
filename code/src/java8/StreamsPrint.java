@@ -23,7 +23,7 @@ public class StreamsPrint {
     System.out.println("\n\n");
     
     // new way
-    list.stream().forEach((Person p) -> System.out.println(Thread.currentThread().getName() + " " + p));
+    list.stream().forEach(p -> System.out.println(Thread.currentThread().getName() + " " + p));
     System.out.println("\n\n");
-    list.parallelStream().forEach((Person p) -> System.out.println(Thread.currentThread().getName() + " " + p));
+    list.parallelStream().forEach(p -> System.out.println(Thread.currentThread().getName() + " " + p));
 */

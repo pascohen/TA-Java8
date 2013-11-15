@@ -13,26 +13,22 @@ public class LambdaCollections {
 
     public static void main(String[] args) {
         List<Person> people = PersonUtil.people();
-        
-/*        Collections.sort(people, new Comparator<Person>() {
+
+        System.out.println(people);
+        Collections.sort(people, new Comparator<Person>() {
             @Override
             public int compare(Person p1, Person p2) {
-                return p1.getLastName().compareTo(p2.getLastName());
+                return (p1.getLastName() + p2.getFirstName())
+                        .compareTo(p2.getLastName() + p2.getFirstName());
             }
         });
-  */      
-        System.out.println(people);
-        
-//        Collections.sort(people, Comparator.comparing(p -> p.getLastName() + p.getFirstName()));
-        
-        System.out.println(people);
 
-        Collections.sort(people, Comparator.comparing(Person::getLastName));
-
-        System.out.println(people);
-        
-        people.sort(Comparator.comparing(p -> p.getLastName() + p.getFirstName()));
-        people.sort(Comparator.comparing(Person::getLastName));
         System.out.println(people);
     }
 }
+
+/*
+ people.sort(Comparator.comparing(p -> p.getLastName() + p.getFirstName()));
+ people.sort(Comparator.comparing(Person::getLastName));
+
+ */

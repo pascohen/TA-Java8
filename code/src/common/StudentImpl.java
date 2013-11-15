@@ -7,7 +7,7 @@ import java.util.Arrays;
  */
 public class StudentImpl implements Student {
 
-    private Person person;
+    private final Person person;
     private double avgGrade;
     
     public StudentImpl(Person person) {
@@ -16,7 +16,7 @@ public class StudentImpl implements Student {
 
     @Override
     public String toString() {
-        return person.toString();
+        return "Student: " + person.toString();
     }
 
     @Override
@@ -32,6 +32,11 @@ public class StudentImpl implements Student {
     @Override
     public String getLastName() {
         return person.getLastName();
+    }
+    
+    @Override
+    public Sex getSex() {
+        return person.getSex();
     }
 
     @Override

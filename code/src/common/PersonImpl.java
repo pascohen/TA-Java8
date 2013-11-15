@@ -8,16 +8,18 @@ public class PersonImpl implements Person {
   private final String firstName;
   private final String lastName;
   private final int age;
+  private final Sex sex;
 
-  public PersonImpl(String firstName, String lastName, int age) {
+  public PersonImpl(String firstName, String lastName, int age, Sex sex) {
     this.firstName = firstName;
     this.lastName = lastName;
     this.age = age;
+    this.sex = sex;
   }
 
   @Override
   public String toString() {
-    return firstName + " " + lastName + " (" + age + ")";
+    return firstName + " " + lastName + " (" + sex.toString().charAt(0) + " " + age + ")";
   }
   
   @Override
@@ -34,4 +36,9 @@ public class PersonImpl implements Person {
   public int getAge() {
     return age;
   }
+
+    @Override
+    public Sex getSex() {
+        return sex;
+    }
 }

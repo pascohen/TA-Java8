@@ -1,6 +1,7 @@
 package java8;
 
 import common.Person;
+import common.Person.Sex;
 import common.PersonUtil;
 import common.Student;
 import common.StudentImpl;
@@ -13,15 +14,26 @@ import java.util.List;
 public class StreamsProcessStudents {
     public static void main(String args[]) {
        List<Person> people = PersonUtil.people();
-       List<Student> students = new ArrayList<>();
+       List<Student> maleStudents = new ArrayList<>();
+       List<Student> femaleStudents = new ArrayList<>();
 
        for (Person p : people) {
            if (p.getAge() > 18) {
-               students.add(new StudentImpl(p));
+               if (Sex.MALE == p.getSex()) {
+                maleStudents.add(new StudentImpl(p));
+               } else {
+                femaleStudents.add(new StudentImpl(p));                   
+               }
            }
        }
        
-       for (Student s : students) {
+       for (Student s : femaleStudents) {
+           System.out.println(s);
+       }
+       
+       System.out.println();
+       
+       for (Student s : maleStudents) {
            System.out.println(s);
        }
     }
