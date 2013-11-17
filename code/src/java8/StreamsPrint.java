@@ -1,7 +1,7 @@
 package java8;
 
 import common.Person;
-import common.PersonUtil;
+import common.Util;
 import java.util.List;
 
 /**
@@ -9,7 +9,7 @@ import java.util.List;
  */
 public class StreamsPrint {
   public static void main(String[] args) {
-    List<Person> people = PersonUtil.people();
+    List<Person> people = Util.people();
     
     // old way
     for (Person p : people) {

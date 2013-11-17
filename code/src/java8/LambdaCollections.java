@@ -1,7 +1,7 @@
 package java8;
 
 import common.Person;
-import common.PersonUtil;
+import common.Util;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
@@ -12,7 +12,7 @@ import java.util.List;
 public class LambdaCollections {
 
     public static void main(String[] args) {
-        List<Person> people = PersonUtil.people();
+        List<Person> people = Util.people();
 
         System.out.println(people);
         Collections.sort(people, new Comparator<Person>() {

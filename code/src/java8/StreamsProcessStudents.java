@@ -2,7 +2,7 @@ package java8;
 
 import common.Person;
 import common.Person.Sex;
-import common.PersonUtil;
+import common.Util;
 import common.Student;
 import common.StudentImpl;
 import java.util.ArrayList;
@@ -13,7 +13,7 @@ import java.util.List;
  */
 public class StreamsProcessStudents {
     public static void main(String args[]) {
-       List<Person> people = PersonUtil.people();
+       List<Person> people = Util.people();
        List<Student> maleStudents = new ArrayList<>();
        List<Student> femaleStudents = new ArrayList<>();
 

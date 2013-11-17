@@ -1,7 +1,7 @@
 package java8;
 
 import common.Employee;
-import common.PersonUtil;
+import common.Util;
 import java.util.Arrays;
 import java.util.List;
 
@@ -14,7 +14,7 @@ public class StreamsProcessEmployees {
 
         int sum = 0;
         for (int id : ids) {
-            Employee e = PersonUtil.findAmadeusEmployee(id);
+            Employee e = Util.findAmadeusEmployee(id);
             if (e != null && "Amadeus".equals(e.getCompanyName())) {
                 sum += e.getSalary();
             }

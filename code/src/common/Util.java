@@ -7,7 +7,7 @@ import java.util.List;
 /**
  * @author Przemyslaw Bielicki
  */
-public class PersonUtil {
+public class Util {
   
   private static final String[] FIRST_NAMES = {"John", "Pierre", "Tom", "Agathe", "Marie", "Naomie", "Vicky", "Mike"};
   

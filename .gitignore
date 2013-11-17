@@ -6,3 +6,15 @@
 *.jar
 *.war
 *.ear
+/code/lambda/nbproject/private/
+/code/lambda/build/
+/code/lambda/target/
+/code/nbproject/private/
+/code/build/
+/code/build.xml
+/code/manifest.mf
+/code/nbproject/build-impl.xml
+/code/nbproject/genfiles.properties
+/code/nbproject/licenseheader.txt
+/code/nbproject/project.properties
+/code/nbproject/project.xml
