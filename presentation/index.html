@@ -265,7 +265,7 @@ public interface Consumer&lt;T&gt; {
            <div id="lambdaContent">
               <ul>
               <div class="fragment" data-fragment-index="1">       
-                 <li>Replace advantageously anonymous functions
+                 <li>Replace advantageously anonymous internal classes
                     <ul><li>Less boilerplate code</li></ul>
               </li>
               </div>
@@ -305,7 +305,7 @@ Thread t = new Thread() {
       doSomethingElse(e);
 });
 
-Thread t = new Thread(() -> doSomething());
+Thread t = new Thread(() -&gt; doSomething());
 </code></pre>
           </div>
 </section>
