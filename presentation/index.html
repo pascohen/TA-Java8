@@ -183,10 +183,10 @@ try {
 }</code></pre>
      </div>
      <div class="custom fragment" data-fragment-index="2">Ugly boilerplate code</div>
-	     </section>
-	     <section>
+     </section>
+     <section>
           <h3>Automatic resource management</h3>
-	  <hr />
+          <hr />
        <div class="fragment" data-fragment-index="1">
           <div class="custom" >In Java 7 code:</div>
      <pre><code style="fomt-size: 120%" class="language-java">try (BufferedReader br = new BufferedReader(new FileReader(path))) {
@@ -230,7 +230,9 @@ byte nybbles = 0b0010_0101;
 long b = 0b11010010_01101001_10010100_10010010;</code></pre>
           </div>
           <div class="fragment" data-fragment-index="2">       
-             <li>File change notification</li>
+             <li>File change notification
+                <ul><li>java.nio.file package</li></ul>
+             </li>
           </div>
           <div class="fragment" data-fragment-index="3">
              <li>Fork/Join (heavily used in Java 8)</li>
@@ -423,10 +425,10 @@ Thread t = new Thread(() -> doSomething());
        <ul>
           <div class="fragment" data-fragment-index="1">
              <li>Java8 is not yet officially released:
-	     <div class="fragment" data-fragment-index="2">
-                <ul><li>Scheduled for March 2014</li>
-				    <li>Early adoption JDK used</li>
-				    <li>Still weak support in Eclipse</li>
+                <div class="fragment" data-fragment-index="2">
+                   <ul><li>Scheduled for March 2014</li>
+                   <li>Early adoption JDK used</li>
+                   <li>Still weak support in Eclipse</li>
                     <li>Future roadmap (Java 9,10,...) is still blurry</li>
                 </ul>
              </div>
@@ -451,6 +453,7 @@ Thread t = new Thread(() -> doSomething());
        <li><small><a href="http://radar.oreilly.com/2011/09/java7-features.html">http://radar.oreilly.com/2011/09/java7-features.html</a></small></li>
        <li><small><a href="http://cr.openjdk.java.net/~briangoetz/lambda/lambda-state-final.html">http://cr.openjdk.java.net/~briangoetz/lambda/lambda-state-final.html</a></small></li>
        <li><small><a href="https://www.youtube.com/watch?v=C_QbkGU_lqY">https://www.youtube.com/watch?v=C_QbkGU_lqY</a></small></li>
+       <li><small><a href="http://blog.joda.org/2009/11/why-jsr-310-isn-joda-time_4941.html">http://blog.joda.org/2009/11/why-jsr-310-isn-joda-time_4941.html</a></small></li>
     </ul>
     </section>
     <section>
@@ -531,12 +534,12 @@ Thread t = new Thread(() -> doSomething());
        Reveal.addEventListener( 'fragmenthidden', function( event ) {
        if (event.fragment.id == "mcatch1") {
           event.fragment.style.display="inline";
-	  } else if (event.fragment.id == "lambda1") {
-	         document.getElementById("lambdaContent").style.display="inline";
-		 } else if (event.fragment.id == "lambda2") {
-		        document.getElementById("lambda1").style.display="inline";
-          }
-          console.log("Hide "+event.fragment.id); // event.fragment = the fragment DOM element       
+       } else if (event.fragment.id == "lambda1") {
+         document.getElementById("lambdaContent").style.display="inline";
+       } else if (event.fragment.id == "lambda2") {
+         document.getElementById("lambda1").style.display="inline";
+       }
+       console.log("Hide "+event.fragment.id); // event.fragment = the fragment DOM element       
     } );
   </script>
 
