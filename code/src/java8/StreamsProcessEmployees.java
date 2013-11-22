@@ -5,9 +5,6 @@ import common.Util;
 import java.util.Arrays;
 import java.util.List;
 
-/**
- * @author Przemyslaw Bielicki
- */
 public class StreamsProcessEmployees {
     public static void main(String args[]) {
         List<Integer> ids = Arrays.asList(0, 1, 2, 3, 4, 5, 6);

@@ -4,9 +4,6 @@ import common.Person;
 import common.Util;
 import java.util.List;
 
-/**
- * @author Przemyslaw Bielicki
- */
 public class StreamsProcessAge {
    public static void main(String args[]) {
        List<Person> people = Util.people();

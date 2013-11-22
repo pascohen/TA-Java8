@@ -3,27 +3,24 @@ package java8;
 import common.Person;
 import common.Util;
 import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
 
-/**
- * @author Przemyslaw Bielicki
- */
 public class StreamsPrint {
   public static void main(String[] args) {
     List<Person> people = Util.people();
+    Map<String, Person> peopleMap = Util.peopleMap();
     
     // old way
     for (Person p : people) {
-      System.out.println(Thread.currentThread().getName() + " " + p);
+      System.out.println("Thread: " + Thread.currentThread().getName() 
+              + ", Person: " + p);
     }
+
+    for (Entry<String, Person> e : peopleMap.entrySet()) {
+      System.out.println(e.getKey() + " = " + e.getValue());
+    }
+    
+    //System.out.println(Runtime.getRuntime().availableProcessors());
   }
 }
-
-/*    Consumer<Person> action = (Person p) -> System.out.println(Thread.currentThread().getName() + " " + p);
-    
-    System.out.println("\n\n");
-    
-    // new way
-    list.stream().forEach(p -> System.out.println(Thread.currentThread().getName() + " " + p));
-    System.out.println("\n\n");
-    list.parallelStream().forEach(p -> System.out.println(Thread.currentThread().getName() + " " + p));
-*/
