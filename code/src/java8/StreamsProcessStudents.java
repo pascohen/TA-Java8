@@ -5,27 +5,22 @@ import common.Person.Sex;
 import common.Student;
 import common.StudentImpl;
 import common.Util;
-import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class StreamsProcessStudents {
-  public static void main(String args[]) {
-    List<Person> people = Util.people();
-    List<Student> maleStudents = new ArrayList<>();
-    int maleTotalAge = 0;
 
-    for (Person p : people) {
-      if (p.getAge() > 18) {
-        if (Sex.MALE == p.getSex()) {
-          maleStudents.add(new StudentImpl(p));
-          maleTotalAge += p.getAge();
-        }
-      }
+    public static void main(String args[]) {
+        List<Person> people = Util.people();
+        List<StudentImpl> maleStudents = people.stream().filter(p -> p.getAge() > 18)
+                .filter(p -> Sex.MALE == p.getSex())
+                .map(StudentImpl::new)
+                .collect(Collectors.toList());
+
+        int avg = (int) maleStudents.stream()
+                .mapToInt(Student::getAge)
+                .average().getAsDouble();
+
+        System.out.println("Avg male student age: " + avg);
     }
-
-    System.out.println("Avg female student age: " + femaleTotalAge / femaleStudents.size());
-    System.out.println();
-    System.out.println("Avg male student age: " + maleTotalAge / maleStudents.size());
-    System.out.println();
-  }
 }

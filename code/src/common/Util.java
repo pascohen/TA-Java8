@@ -1,8 +1,10 @@
 package common;
 
 import common.Person.Sex;
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author Przemyslaw Bielicki
@@ -49,6 +51,13 @@ public class Util {
     }
     return list;
   }
+  
+  public static Map<String, Person> peopleMap() {
+      final Map<String, Person> map = new HashMap<>();
+      people().forEach(p -> map.put(p.getLastName().charAt(0) + ""
+              + p.getFirstName().charAt(0), p));
+      return map;
+  }  
   
   public static List<Employee> employees() {
       return EMPLOYEES;
