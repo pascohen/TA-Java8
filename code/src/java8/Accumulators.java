@@ -24,13 +24,5 @@ public class Accumulators {
                 });
 
         System.out.println("Average male adult age: " + acc.intValue() / adder.intValue());
-        
-        int avg = (int) people.stream()
-                .filter(p -> p.getAge() >= 18)
-                .filter(p -> Sex.FEMALE == p.getSex())
-                .mapToInt(Person::getAge)
-                .average().getAsDouble();
-
-        System.out.println("Average male adult age: " + avg);
     }
 }

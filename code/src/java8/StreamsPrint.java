@@ -10,6 +10,8 @@ public class StreamsPrint {
     List<Person> people = Util.people();
     Map<String, Person> peopleMap = Util.peopleMap();
     
+    System.out.println("Number of processors (cores): " + Runtime.getRuntime().availableProcessors());
+    
     people.stream()
             .parallel()
             .forEach(p -> System.out.println("Thread: " 

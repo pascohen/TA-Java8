@@ -13,11 +13,7 @@ public class LambdaCollections {
         System.out.println(people);
         people.sort(Comparator.comparing(Person::getLastName));
         System.out.println(people);
+        people.sort(Comparator.comparing(p -> p.getLastName() + p.getFirstName()));
+        System.out.println(people);
     }
 }
-
-/*
- people.sort(Comparator.comparing(p -> p.getLastName() + p.getFirstName()));
- people.sort(Comparator.comparing(Person::getLastName));
-
- */
